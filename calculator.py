@@ -2,37 +2,36 @@
 
 from arithmetic import (add, subtract, multiply, divide, square, cube,
                         power, mod)
+""" imports arithmetic module with the add, subtract, multiply, divide, square, cube, power, and mod funtions"""
 
+while True:  #create a while loop and loops until you enter q for quit
+    user_entry = input("Please enter in your equation:  > ")   #ask user to enter in equation
+    tokens = user_entry.split(" ")   #use split function to put each entry into a list
+    result = None   #create a place to store the return value
+    operator = tokens[0]   #create variable 
 
-while True:
-    user_entry = input("Please enter in your equation:  > ")
-    tokens = user_entry.split(" ")
-    result = None
-    operator = tokens[0]
-
-    if "q" in tokens:
+    if "q" in tokens:   #enter in q to exit the calculator
         print("EXIT")
         break
 
-    num1 = tokens[1]
-
-    if len(tokens) < 2:
+    if len(tokens) < 2:   #if user enters in one charater, prints not enough entered
         print("Not enought numbers.")
         continue
 
-    if len(tokens) < 3:
+    num1 = tokens[1]   #create variable num1 to be the first number you enter
+
+    if len(tokens) < 3:   #if user enters in two entries num2 is set to a string of zero
         num2 = "0"
 
     else:
-        num2 = tokens[2]
+        num2 = tokens[2]   
 
-    result = None
+    if not num1.isdigit() or not num2.isdigit():   #check to make sure num1 and num2 are digits
+        print("Please enter numbers.")
+        continue
 
-    if len(tokens) > 3:
-        num3 = tokens[3]
 
-
-    elif operator == "+":
+    if operator == "+":
         result = add(float(num1), float(num2))
 
     elif operator == "-":
