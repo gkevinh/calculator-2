@@ -1,35 +1,60 @@
 """CLI application for a prefix-notation calculator."""
 
 from arithmetic import (add, subtract, multiply, divide, square, cube,
-                        power, mod, )
+                        power, mod)
 
 
 while True:
     user_entry = input("Please enter in your equation:  > ")
-    user_entry.split(" ")
-    num1 = user_entry[1]
-    num2 = user_entry[2]
-    num3 = user_entry[3]
+    tokens = user_entry.split(" ")
+    result = None
+    operator = tokens[0]
 
-    if user_entry == "q":
+    if "q" in tokens:
         print("EXIT")
         break
 
+    num1 = tokens[1]
+
+    if len(tokens) < 2:
+        print("Not enought numbers.")
+        continue
+
+    if len(tokens) < 3:
+        num2 = "0"
+
     else:
-        if user_entry[0] == "square":
-            square(num1)
+        num2 = tokens[2]
+
+    result = None
+
+    if len(tokens) > 3:
+        num3 = tokens[3]
 
 
+    elif operator == "+":
+        result = add(float(num1), float(num2))
 
+    elif operator == "-":
+        result = subtract(float(num1), float(num2))
 
-# repeat forever:
-#     read input
-#     tokenize input
-#         if the first token is "q":
-#             quit
-#         else:
-#             (decide which math function to call based on first token)
-#             if the first token is 'pow':
-#                   call the power function with the other two tokens
+    elif operator == "*":
+        result = multiply(float(num1), float(num2))
 
-#             (...etc.)
+    elif operator == "/":
+        result = divide(float(num1), float(num2))
+
+    elif operator == "cube":
+        result = cube(float(num1))
+
+    elif operator == "square":
+        result = square(float(num1))
+
+    elif operator == "pow":
+        result = power(float(num1), float(num2))
+
+    elif operator == "mod":
+        result = mod(float(num1), float(num2))
+
+    print(result)
+
